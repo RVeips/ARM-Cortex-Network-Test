@@ -1,0 +1,6 @@
+[
+    {
+        "name": "CFXS GCC Toolchain",
+        "toolchainFile": "${workspaceFolder}/CMake/Toolchain/GCC_ARM.cmake"
+    }
+]
