@@ -1,0 +1,6 @@
+[submodule "CortexNetworkTestApp/vendor/lwip"]
+	path = CortexNetworkTestApp/vendor/lwip
+	url = https://github.com/CFXS/lwip.git
+[submodule "CMake"]
+	path = CMake
+	url = https://github.com/CFXS/CFXS-CMake-Bare-Metal-Toolchain.git
