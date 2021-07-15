@@ -7,6 +7,3 @@
 [submodule "CortexNetworkTestApp/vendor/lwip"]
 	path = CortexNetworkTestApp/vendor/lwip
 	url = https://github.com/CFXS/lwip.git
-[submodule "CortexNetworkTestApp/vendor/CFXS/Base"]
-	path = CortexNetworkTestApp/vendor/CFXS/Base
-	url = https://github.com/CFXS/CFXS-Base.git
