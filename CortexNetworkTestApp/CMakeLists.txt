@@ -1,7 +1,7 @@
 include("${PROJECT_SOURCE_DIR}/CMake/Target/CortexM4F.cmake")
 include("_Sources.cmake")
 
-set(CMAKE_UNITY_BUILD true)
+set(CMAKE_UNITY_BUILD false)
 set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
 
 set(EXE_NAME CortexNetworkTestApp)
@@ -41,6 +41,7 @@ add_compile_options(
     -Wno-write-strings
     -Wno-literal-suffix
     -Wno-register
+    -Wno-tautological-compare
 
     #-fdebug-prefix-map="${CMAKE_SOURCE_DIR}"=.
 )
@@ -64,13 +65,6 @@ target_precompile_headers(
     <stdbool.h>
     <string.h>
     <CFXS.hpp>
-    "$<$<COMPILE_LANGUAGE:CXX>:<vector$<ANGLE-R>>"
-    "$<$<COMPILE_LANGUAGE:CXX>:<map$<ANGLE-R>>"
-    "$<$<COMPILE_LANGUAGE:CXX>:<unordered_map$<ANGLE-R>>"
-    "$<$<COMPILE_LANGUAGE:CXX>:<utility$<ANGLE-R>>"
-    "$<$<COMPILE_LANGUAGE:CXX>:<memory$<ANGLE-R>>"
-    "$<$<COMPILE_LANGUAGE:CXX>:<algorithm$<ANGLE-R>>"
-    "$<$<COMPILE_LANGUAGE:CXX>:<array$<ANGLE-R>>"
 )
 
 target_link_options(
