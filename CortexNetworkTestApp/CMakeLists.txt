@@ -1,6 +1,9 @@
 include("${PROJECT_SOURCE_DIR}/CMake/Target/CortexM4F.cmake")
 include("_Sources.cmake")
 
+set(CMAKE_UNITY_BUILD true)
+set(CMAKE_UNITY_BUILD_BATCH_SIZE 16)
+
 set(EXE_NAME CortexNetworkTestApp)
 
 set(LINKER_SCRIPT "\"${CMAKE_CURRENT_SOURCE_DIR}/LinkerScript.ld\"")
@@ -36,6 +39,8 @@ add_compile_options(
     -Wno-shift-negative-value
     -Wno-cast-align
     -Wno-write-strings
+    -Wno-literal-suffix
+    -Wno-register
 
     #-fdebug-prefix-map="${CMAKE_SOURCE_DIR}"=.
 )
@@ -43,6 +48,8 @@ add_compile_options(
 add_executable(${EXE_NAME} ${sources} ${headers})
 
 target_include_directories(${EXE_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
+include_directories(${EXE_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/_config/lwip)
+include_directories(${EXE_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/_config/lwip/include)
 include("_Modules.cmake")
 
 target_compile_definitions(${EXE_NAME} PUBLIC PART_TM4C1294NCPDT TARGET_IS_TM4C129_RA2)
@@ -50,12 +57,13 @@ target_compile_definitions(${EXE_NAME} PUBLIC PART_TM4C1294NCPDT TARGET_IS_TM4C1
 target_precompile_headers(
     ${EXE_NAME}
     PUBLIC
-    <cstddef>
-    <cstdint>
-    <cstdio>
-    <cstdlib>
-    <cstdbool>
-    <cstring>
+    <stddef.h>
+    <stdint.h>
+    <stdio.h>
+    <stdlib.h>
+    <stdbool.h>
+    <string.h>
+    <CFXS.hpp>
     "$<$<COMPILE_LANGUAGE:CXX>:<vector$<ANGLE-R>>"
     "$<$<COMPILE_LANGUAGE:CXX>:<map$<ANGLE-R>>"
     "$<$<COMPILE_LANGUAGE:CXX>:<unordered_map$<ANGLE-R>>"

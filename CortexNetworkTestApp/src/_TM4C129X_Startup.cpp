@@ -1,7 +1,7 @@
 #include <driverlib_includes.hpp>
 
 namespace CFXS::CPU {
-    extern uint32_t CLOCK_FREQ;
+    extern uint32_t CLOCK_FREQUENCY;
 } // namespace CFXS::CPU
 
 // Empty handler for Tiva lib ASSERT
@@ -54,7 +54,7 @@ static __interrupt void __interrupt_Reset() {
     HWREG(NVIC_CPAC) = ((HWREG(NVIC_CPAC) & ~(NVIC_CPAC_CP10_M | NVIC_CPAC_CP11_M)) | NVIC_CPAC_CP10_FULL | NVIC_CPAC_CP11_FULL);
 
     // Configure clock (for fast init)
-    SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480), CFXS::CPU::CLOCK_FREQ);
+    SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ | SYSCTL_OSC_MAIN | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480), CFXS::CPU::CLOCK_FREQUENCY);
 
     // const init
     auto pui32Src = &__TEXT_END__;
