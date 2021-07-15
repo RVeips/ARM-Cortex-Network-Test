@@ -4,3 +4,6 @@
 [submodule "CortexNetworkTestApp/vendor/tm4c-driverlib"]
 	path = CortexNetworkTestApp/vendor/tm4c-driverlib
 	url = https://github.com/CFXS/TM4C-driverlib.git
+[submodule "CortexNetworkTestApp/vendor/lwip"]
+	path = CortexNetworkTestApp/vendor/lwip
+	url = https://github.com/CFXS/lwip.git
