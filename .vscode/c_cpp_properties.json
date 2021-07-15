@@ -8,28 +8,12 @@
     "configurations": [
         {
             "name": "GCC",
-            "defines": [
-                "__INT8_TYPE__=char",
-                "__INT16_TYPE__=short",
-                "__INT32_TYPE__=int",
-                "__SIZE_TYPE__=unsigned int",
-                "PART_TM4C1294NCPDT",
-                "TARGET_IS_TM4C129_RA2",
-                "DEBUG"
-            ],
-            "includePath": [
-                "${ProjectRoot}/src",
-                "${ProjectVendorRoot}/lwip/include",
-                "${ProjectVendorRoot}/tm4c-driverlib"
-            ],
-            "forcedInclude": [
-                "${workspaceFolder}/build/${ProjectName}/CMakeFiles/${ProjectName}.dir/cmake_pch.hxx"
-            ],
             "cStandard": "c11",
             "cppStandard": "c++17",
             "compilerPath": "D:\\GNU Arm Embedded Toolchain\\10 2020-q4-major\\bin\\arm-none-eabi-g++.exe",
             "intelliSenseMode": "gcc-arm",
-            "compileCommands": "${workspaceFolder}/build/compile_commands.json"
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+            "configurationProvider": "ms-vscode.cmake-tools"
         }
     ]
 }

@@ -1,3 +1,3 @@
 # driverlib
-include("${VENDOR_DIR}/tm4c-driverlib/_Module.cmake")
-use_driverlib(${EXE_NAME} ${VENDOR_DIR}/tm4c-driverlib)
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/vendor/tm4c-driverlib")
+target_link_libraries(${EXE_NAME} PRIVATE TM4C_driverlib)

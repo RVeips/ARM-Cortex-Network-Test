@@ -50,15 +50,19 @@
         "fstream": "cpp",
         "iostream": "cpp",
         "sstream": "cpp",
-        "time.h": "c",
-        "hw_types.h": "c",
         "istream": "cpp",
-        "segger_rtt.h": "c",
-        "opt.h": "c",
-        "debug.h": "c",
-        "lwipopts.h": "c",
-        "pbuf.h": "c",
-        "lwiplib.h": "c"
     },
-    "cmake.buildDirectory": "${workspaceFolder}/build"
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "editor.tokenColorCustomizations": {
+        "[Default Dark+]": {
+            "textMateRules": [
+                {
+                    "scope": "entity.name.function.preprocessor",
+                    "settings": {
+                        "foreground": "#3c87ff"
+                    }
+                }
+            ]
+        }
+    }
 }

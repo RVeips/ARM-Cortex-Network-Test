@@ -47,7 +47,6 @@ include("_Modules.cmake")
 
 target_compile_definitions(${EXE_NAME} PUBLIC PART_TM4C1294NCPDT TARGET_IS_TM4C129_RA2)
 
-
 target_precompile_headers(
     ${EXE_NAME}
     PUBLIC
@@ -57,7 +56,6 @@ target_precompile_headers(
     <cstdlib>
     <cstdbool>
     <cstring>
-    <preinclude.hpp>
     "$<$<COMPILE_LANGUAGE:CXX>:<vector$<ANGLE-R>>"
     "$<$<COMPILE_LANGUAGE:CXX>:<map$<ANGLE-R>>"
     "$<$<COMPILE_LANGUAGE:CXX>:<unordered_map$<ANGLE-R>>"
@@ -67,9 +65,11 @@ target_precompile_headers(
     "$<$<COMPILE_LANGUAGE:CXX>:<array$<ANGLE-R>>"
 )
 
-target_link_libraries(${EXE_NAME}
+target_link_options(
+    ${EXE_NAME}
+    PRIVATE
     ${CPU_OPTIONS}
-    -T${LINKER_SCRIPT}
+    SHELL:-T${LINKER_SCRIPT}
     -Xlinker -Map=output.map
     -o${EXE_NAME}.elf.
 )

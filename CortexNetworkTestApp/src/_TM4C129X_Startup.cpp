@@ -24,34 +24,32 @@ extern void (*const __INIT_ARRAY_END__[])(void);
 extern void (*const __FINI_ARRAY_START__[])(void);
 extern void (*const __FINI_ARRAY_END__[])(void);
 /////////////////////////////////////////////////////////////
-// Default Handlers
-
-static void __interrupt_NMI(void) {
-    //CFXS_println("[!!!] __interrupt_NMI");
-    __asm__("bkpt");
-}
-static void __interrupt_HardFault(void) {
-    //CFXS_println("[!!!] __interrupt_HardFault");
-    __asm__("bkpt");
-}
-static void __interrupt_DefaultHandler(void) {
-    //CFXS_println("[!!!] __interrupt_DefaultHandler");
-    __asm__("bkpt");
-}
-/////////////////////////////////////////////////////////////
 // Default startup
 
-void start() {
-}
-
-__attribute__((weak, used)) void __cfxs_entry_point() {
-    //CFXS_println("[TM4C129X_Startup] __cfxs_entry_point");
+__weak __used void __cfxs_entry_point() {
     extern int main();
     main();
     __asm__("bkpt");
 }
 
-extern "C" void __interrupt_Reset() {
+/////////////////////////////////////////////////////////////
+// Default Handlers
+
+static __interrupt void __interrupt_NMI(void) {
+    //CFXS_println("[!!!] __interrupt_NMI");
+    __asm__("bkpt");
+}
+static __interrupt void __interrupt_HardFault(void) {
+    //CFXS_println("[!!!] __interrupt_HardFault");
+    __asm__("bkpt");
+}
+
+static __interrupt void __interrupt_DefaultHandler(void) {
+    //CFXS_println("[!!!] __interrupt_DefaultHandler");
+    __asm__("bkpt");
+}
+
+static __interrupt void __interrupt_Reset() {
     // Enable FPU
     HWREG(NVIC_CPAC) = ((HWREG(NVIC_CPAC) & ~(NVIC_CPAC_CP10_M | NVIC_CPAC_CP11_M)) | NVIC_CPAC_CP10_FULL | NVIC_CPAC_CP11_FULL);
 
@@ -89,7 +87,7 @@ extern "C" void __interrupt_Reset() {
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // Default Vector Table
-extern "C" __attribute__((section(".__vector_table"), used)) void (*const __vector_table[])(void) = {
+__attribute__((section(".__vector_table"), used)) void (*const __vector_table[])(void) = {
     (void (*)(void))(&__STACK_BASE__), // Initial stack pointer
     __interrupt_Reset,                 // Reset handler
     __interrupt_NMI,                   // NMI handler
