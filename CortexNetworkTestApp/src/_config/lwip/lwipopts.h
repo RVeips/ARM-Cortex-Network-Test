@@ -70,7 +70,7 @@
 #define NUM_RX_DESCRIPTORS 32
 
 #define LWIP_RAND get_random_value
-inline uint32_t get_random_value(void) {
+static uint32_t get_random_value(void) {
     static uint32_t seed_value = 1337;
     srand(seed_value);
     uint32_t num = rand();

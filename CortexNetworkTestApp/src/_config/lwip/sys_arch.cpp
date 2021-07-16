@@ -1,4 +1,3 @@
-extern "C" {
 /**
  * @file - sys_arch.c
  * System Architecture support routines for TI Tiva devices.
@@ -39,6 +38,9 @@ extern "C" {
 
 /* Copyright (c) 2008 Texas Instruments Incorporated */
 
+extern uint32_t g_ui32LocalTimer;
+extern "C" {
+
 /* lwIP includes. */
 #include "lwip/opt.h"
 #include "lwip/sys.h"
@@ -60,7 +62,6 @@ extern "C" {
  * This global is defined in lwiplib.c and contains a count of the number of
  * elapsed milliseconds since lwIP started.
  */
-extern uint32_t g_ui32LocalTimer;
 
 /**
  * This function returns the system time in milliseconds.

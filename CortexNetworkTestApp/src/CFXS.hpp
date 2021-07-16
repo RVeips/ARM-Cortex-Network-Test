@@ -1,5 +1,7 @@
 #pragma once
 
+#ifdef __cplusplus
+
 namespace CFXS::CPU {
 
     static void EnableInterrupts() {
@@ -13,3 +15,5 @@ namespace CFXS::CPU {
     }
 
 } // namespace CFXS::CPU
+
+#endif

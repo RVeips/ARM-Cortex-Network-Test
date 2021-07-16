@@ -9,8 +9,6 @@
 #include "netif/etharp.h"
 #include "netif/tivaif.h"
 
-extern "C" {
-
 #ifdef PART_TM4C1292NCPDT
 #include "driverlib/gpio.h"
 #include "driverlib/pin_map.h"
@@ -1346,4 +1344,3 @@ void lwIPNetworkConfigChange(uint32_t ui32IPAddr, uint32_t ui32NetMask, uint32_t
 //! @}
 //
 //*****************************************************************************
-}

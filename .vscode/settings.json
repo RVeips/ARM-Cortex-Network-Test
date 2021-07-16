@@ -51,6 +51,9 @@
         "iostream": "cpp",
         "sstream": "cpp",
         "istream": "cpp",
+        "driverlib_includes.hpp": "c",
+        "gpio.h": "c",
+        "epi.h": "c"
     },
     "cmake.buildDirectory": "${workspaceFolder}/build",
     "editor.tokenColorCustomizations": {

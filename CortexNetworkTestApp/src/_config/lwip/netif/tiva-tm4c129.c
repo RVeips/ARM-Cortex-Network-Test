@@ -47,7 +47,7 @@
 #include <lwip/snmp.h>
 #include <lwip/stats.h>
 
-#include "driverlib/emac.h"
+#include <driverlib_includes.hpp>
 #include "lwip/def.h"
 #include "lwip/mem.h"
 #include "lwip/netif.h"
@@ -513,13 +513,13 @@ static err_t tivaif_transmit(struct netif *psNetif, struct pbuf *p) {
     uint32_t ui32NumChained, ui32NumDescs;
     bool bFirst;
 
-    static bool s_Sending = false;
 #ifdef DEBUG
+    static bool s_Sending = false;
     if (s_Sending) {
         asm volatile("bkpt #1");
     }
-#endif
     s_Sending = true;
+#endif
 
     SYS_ARCH_DECL_PROTECT(lev);
 
@@ -552,7 +552,9 @@ static err_t tivaif_transmit(struct netif *psNetif, struct pbuf *p) {
         LINK_STATS_INC(link.memerr);
         SYS_ARCH_UNPROTECT(lev);
 
+#ifdef DEBUG
         s_Sending = false;
+#endif
         return (ERR_MEM);
     }
 
@@ -572,7 +574,9 @@ static err_t tivaif_transmit(struct netif *psNetif, struct pbuf *p) {
         DRIVER_STATS_INC(TXNoDescCount);
         SYS_ARCH_UNPROTECT(lev);
 
+#ifdef DEBUG
         s_Sending = false;
+#endif
         return (ERR_MEM);
     }
 
@@ -592,7 +596,9 @@ static err_t tivaif_transmit(struct netif *psNetif, struct pbuf *p) {
         DRIVER_STATS_INC(TXNoDescCount);
         SYS_ARCH_UNPROTECT(lev);
 
+#ifdef DEBUG
         s_Sending = false;
+#endif
         return (ERR_MEM);
     }
 
@@ -663,7 +669,9 @@ static err_t tivaif_transmit(struct netif *psNetif, struct pbuf *p) {
 
     SYS_ARCH_UNPROTECT(lev);
 
+#ifdef DEBUG
     s_Sending = false;
+#endif
 
     return (ERR_OK);
 }
@@ -1040,7 +1048,7 @@ void tivaif_interrupt(struct netif *psNetif, uint32_t ui32Status) {
     tStellarisIF *tivaif;
 
     /* setup pointer to the if state data */
-    tivaif = (tStellarisIF*)psNetif->state;
+    tivaif = (tStellarisIF *)psNetif->state;
 
     /* Update our debug interrupt counters. */
     if (ui32Status & EMAC_INT_NORMAL_INT) {
