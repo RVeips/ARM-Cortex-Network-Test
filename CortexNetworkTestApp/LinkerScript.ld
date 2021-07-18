@@ -54,6 +54,13 @@ SECTIONS
         __DATA_END__ = .;
     } > SRAM
     
+    PROVIDE_HIDDEN(__exidx_start = .);
+    .ARM.exidx :
+    {
+      *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+    } > SRAM
+    PROVIDE_HIDDEN(__exidx_end = .);
+    
     .bss (NOLOAD):
     {
         . = ALIGN(4);
@@ -66,13 +73,6 @@ SECTIONS
         ___BSS_START___end__ = __BSS_END__;
         . = ALIGN(8);
     } > SRAM
-    
-    PROVIDE_HIDDEN(__exidx_start = .);
-    .ARM.exidx :
-    {
-      *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-    } > SRAM
-    PROVIDE_HIDDEN(__exidx_end = .);
     
     . = ALIGN(4);
     _end = . ;

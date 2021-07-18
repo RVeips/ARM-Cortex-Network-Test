@@ -127,7 +127,7 @@ struct netif g_sNetIF;
 #ifndef HOST_TMR_INTERVAL
 #define HOST_TMR_INTERVAL 0
 #else
-extern void lwIPHostTimerHandler(void);
+extern "C" void lwIPHostTimerHandler(void);
 #endif
 
 //*****************************************************************************

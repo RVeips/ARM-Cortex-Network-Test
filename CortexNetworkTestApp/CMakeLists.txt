@@ -20,7 +20,11 @@ add_compile_options(
     $<$<COMPILE_LANGUAGE:CXX>:-Wno-old-style-cast>
     
     -Wl,--gc-sections # remove unused sections
-    
+    -Wl,--print-gc-sections
+
+    #-Wstack-usage=x
+    #-fstack-usage
+
     -Wall
     -Wextra
     -Wcast-align
@@ -43,8 +47,7 @@ add_compile_options(
     $<$<COMPILE_LANGUAGE:CXX>:-Wno-register>
     $<$<COMPILE_LANGUAGE:CXX>:-fpermissive>
     
-
-    #-fdebug-prefix-map="${CMAKE_SOURCE_DIR}"=.
+    -fdebug-prefix-map="${CMAKE_SOURCE_DIR}"=.
 )
 
 add_executable(${EXE_NAME} ${sources} ${headers})
@@ -55,8 +58,6 @@ include_directories(${EXE_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/_config/l
 include("_Modules.cmake")
 
 target_compile_definitions(${EXE_NAME} PUBLIC PART_TM4C1294NCPDT TARGET_IS_TM4C129_RA2)
-
-target_compile_options(${EXE_NAME} PRIVATE "-flto")
 
 target_precompile_headers(
     ${EXE_NAME}
@@ -81,4 +82,4 @@ target_link_options(
 add_custom_command(TARGET ${EXE_NAME} POST_BUILD
     COMMAND objcopy -S -O binary ${CMAKE_CURRENT_SOURCE_DIR}/../build/${EXE_NAME}/${EXE_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/../build/${EXE_NAME}.bin)
 add_custom_command(TARGET ${EXE_NAME} POST_BUILD
-    COMMAND nm --print-size --size-sort --format=bsd --radix=d ${CMAKE_CURRENT_SOURCE_DIR}/../build/${EXE_NAME}/${EXE_NAME} > ${CMAKE_CURRENT_SOURCE_DIR}/../build/${EXE_NAME}_Symbols.txt)
+    COMMAND nm -l --print-size --size-sort --format=bsd --radix=x ${CMAKE_CURRENT_SOURCE_DIR}/../build/${EXE_NAME}/${EXE_NAME} > ${CMAKE_CURRENT_SOURCE_DIR}/../build/${EXE_NAME}_Symbols.txt)
