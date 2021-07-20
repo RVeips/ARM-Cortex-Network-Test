@@ -6,7 +6,7 @@ namespace CFXS::CPU {
 
 // Empty handler for Tiva lib ASSERT
 extern "C" void __error__(char *pcFilename, uint32_t ui32Line) {
-    //CFXS_println("[!ERROR!] %s at Line %lu", pcFilename, ui32Line);
+    __asm__("bkpt");
 }
 
 /////////////////////////////////////////////////////////////
@@ -36,16 +36,13 @@ __weak __used void __cfxs_entry_point() {
 // Default Handlers
 
 static __interrupt void __interrupt_NMI(void) {
-    //CFXS_println("[!!!] __interrupt_NMI");
     __asm__("bkpt");
 }
 static __interrupt void __interrupt_HardFault(void) {
-    //CFXS_println("[!!!] __interrupt_HardFault");
     __asm__("bkpt");
 }
 
 static __interrupt void __interrupt_DefaultHandler(void) {
-    //CFXS_println("[!!!] __interrupt_DefaultHandler");
     __asm__("bkpt");
 }
 
@@ -81,13 +78,12 @@ static __interrupt void __interrupt_Reset() {
         __INIT_ARRAY_START__[i]();
     }
 
-    //CFXS_println("[startup] Clock configured to %luHz", freq);
     __cfxs_entry_point();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // Default Vector Table
-__attribute__((section(".__vector_table"), used)) void (*const __vector_table[])(void) = {
+__attribute__((section(".vector_table"), used)) void (*const __vector_table[])(void) = {
     (void (*)(void))(&__STACK_BASE__), // Initial stack pointer
     __interrupt_Reset,                 // Reset handler
     __interrupt_NMI,                   // NMI handler
