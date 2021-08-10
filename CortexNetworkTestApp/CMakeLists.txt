@@ -56,8 +56,7 @@ target_include_directories(${EXE_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 include_directories(${EXE_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/_config/lwip)
 include_directories(${EXE_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/_config/lwip/include)
 include("_Modules.cmake")
-
-target_compile_definitions(${EXE_NAME} PUBLIC PART_TM4C1294NCPDT TARGET_IS_TM4C129_RA2)
+include("_Defines.cmake")
 
 target_precompile_headers(
     ${EXE_NAME}

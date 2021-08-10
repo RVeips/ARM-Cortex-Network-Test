@@ -1,0 +1,1 @@
+target_compile_definitions(${EXE_NAME} PUBLIC "PART_TM4C1294NCPDT" "TARGET_IS_TM4C129_RA2")

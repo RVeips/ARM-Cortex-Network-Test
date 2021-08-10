@@ -27,11 +27,48 @@ static constexpr uint32_t Pins[]  = {GPIO_PIN_1, GPIO_PIN_0, GPIO_PIN_4, GPIO_PI
 extern void lwIPServiceTimers();
 
 extern "C" void InputEvent() {
-    TOGGLE_LED(3);
+    TOGGLE_LED(2);
 }
 
-__used err_t g_SendError = 0;
+extern "C" {
+
+uint8_t s_Heap[64][2048];
+bool s_HeapUsage[64] = {false};
+
+void *malloc(size_t size) {
+    if (size < 2048) {
+        for (int i = 0; i < 64; i++) {
+            if (s_HeapUsage[i] == false) {
+                s_HeapUsage[i] = true;
+                return s_Heap[i];
+            }
+        }
+    } else {
+        CFXS_println("buffer too big");
+    }
+
+    return nullptr;
+}
+
+void free(void *ptr) {
+    if (!ptr)
+        return;
+
+    for (int i = 0; i < 64; i++) {
+        if (ptr == s_Heap[i]) {
+            s_HeapUsage[i] = false;
+            return;
+        }
+    }
+}
+}
+
+uint32_t s_BPS  = 0;
+uint32_t s_Rate = 0;
+
 int main() {
+    CFXS_println("[CortexNetworkTestApp] main()");
+
     ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);
     ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
     while (!ROM_SysCtlPeripheralReady(SYSCTL_PERIPH_GPION) || !ROM_SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOF)) {}
@@ -44,13 +81,22 @@ int main() {
         TOGGLE_LED(1);
         lwIPEthernetIntHandler();
     });
-    lwIPInit(CFXS::CPU::CLOCK_FREQUENCY, mac.GetDataPointer(), ip.GetValue(), mask.GetValue(), gateway.GetValue(), IPADDR_USE_STATIC);
+    lwIPInit(CFXS::CPU::CLOCK_FREQUENCY,
+             mac.GetDataPointer(),
+             ip.ToNetworkOrder(),
+             mask.ToNetworkOrder(),
+             gateway.ToNetworkOrder(),
+             IPADDR_USE_STATIC);
 
     SysTickPeriodSet(120000);
     SysTickIntRegister([]() __interrupt {
         CFXS::Time::ms++;
         if ((CFXS::Time::ms % 100) == 0) {
             lwIPServiceTimers();
+        }
+        if ((CFXS::Time::ms % 1000) == 0) {
+            s_Rate = s_BPS;
+            s_BPS  = 0;
         }
     });
     SysTickEnable();
@@ -61,7 +107,9 @@ int main() {
     raw_recv(
         rawpcb,
         [](void *arg, struct raw_pcb *pcb, struct pbuf *p, const ip_addr_t *addr) -> uint8_t {
-            TOGGLE_LED(2);
+            TOGGLE_LED(3);
+            s_BPS += p->tot_len;
+            pbuf_free(p);
             return 1;
         },
         nullptr);

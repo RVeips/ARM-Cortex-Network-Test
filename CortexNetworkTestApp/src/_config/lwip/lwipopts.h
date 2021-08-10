@@ -105,7 +105,7 @@ extern void CheckGlobalLWIPLock();
 //
 //*****************************************************************************
 #define MEM_LIBC_MALLOC                        1
-#define MEMP_MEM_MALLOC                        0
+#define MEMP_MEM_MALLOC                        1
 #define MEM_ALIGNMENT                          4 // default is 1
 #define MEM_SIZE                               0 //((NUM_TX_DESCRIPTORS + 4) * 1600) // default is 1600
 #define LWIP_ALLOW_MEM_FREE_FROM_OTHER_CONTEXT 0
@@ -480,9 +480,6 @@ extern void CheckGlobalLWIPLock();
 //#else
 #define LWIP_STATS 0
 //#endif
-
-#define LWIP_DBG_MIN_LEVEL      LWIP_DBG_LEVEL_OFF
-#define LWIP_PLATFORM_DIAG(msg) printf(msg)
 
 //
 // Define a generic ASSERT display macro here ... use the DIAG macro to display
