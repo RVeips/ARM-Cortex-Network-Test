@@ -62,10 +62,6 @@
 //#define EEE_SUPPORT        1
 #endif
 
-#ifdef PLATFORM_SAMA
-#include <mm/cache.h>
-#endif
-
 #define NUM_TX_DESCRIPTORS 32
 #define NUM_RX_DESCRIPTORS 32
 

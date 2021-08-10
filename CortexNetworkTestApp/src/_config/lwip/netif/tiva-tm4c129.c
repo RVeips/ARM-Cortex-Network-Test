@@ -1087,7 +1087,7 @@ void tivaif_interrupt(struct netif *psNetif, uint32_t ui32Status) {
     }
 
     if (ui32Status & (EMAC_INT_RECEIVE | EMAC_INT_RX_NO_BUFFER | EMAC_INT_RX_STOPPED)) {
-        //tivaif_receive(psNetif);
+        tivaif_receive(psNetif);
         s_ReceiveInterruptStatus |= ui32Status & (EMAC_INT_RECEIVE | EMAC_INT_RX_NO_BUFFER | EMAC_INT_RX_STOPPED);
     }
 }

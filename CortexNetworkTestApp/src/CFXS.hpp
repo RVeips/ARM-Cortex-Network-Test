@@ -4,15 +4,9 @@
 
 namespace CFXS::CPU {
 
-    static void EnableInterrupts() {
-    }
-
-    static void DisableInterrupts() {
-    }
-
-    static bool InterruptsEnabled() {
-        return false;
-    }
+    void EnableInterrupts();
+    void DisableInterrupts();
+    bool InterruptsEnabled();
 
 } // namespace CFXS::CPU
 

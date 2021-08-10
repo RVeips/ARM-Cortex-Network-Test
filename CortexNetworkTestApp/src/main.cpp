@@ -5,7 +5,7 @@
 #include <driverlib/systick.h>
 
 namespace CFXS::CPU {
-    extern uint32_t CLOCK_FREQUENCY;
+    extern const uint32_t CLOCK_FREQUENCY;
 }
 
 namespace CFXS::Time {
@@ -16,7 +16,7 @@ namespace CFXS::Time {
 static constexpr CFXS::MAC_Address mac = {0x08, 0x00, 0x28, 0x5A, 0x92, 0x4F};
 static constexpr CFXS::IPv4 ip         = {192, 168, 1, 222};
 static constexpr CFXS::IPv4 mask       = {255, 255, 255, 0};
-static constexpr CFXS::IPv4 gateway    = {0, 0, 0, 0};
+static constexpr CFXS::IPv4 gateway    = {255, 255, 255, 255};
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 static constexpr uint32_t Ports[] = {GPIO_PORTN_BASE, GPIO_PORTN_BASE, GPIO_PORTF_BASE, GPIO_PORTF_BASE};
 static constexpr uint32_t Pins[]  = {GPIO_PIN_1, GPIO_PIN_0, GPIO_PIN_4, GPIO_PIN_0};
@@ -24,6 +24,13 @@ static constexpr uint32_t Pins[]  = {GPIO_PIN_1, GPIO_PIN_0, GPIO_PIN_4, GPIO_PI
 #define TOGGLE_LED(id) GPIOPinWrite(Ports[id], Pins[id], !GPIOPinRead(Ports[id], Pins[id]) ? Pins[id] : 0)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+extern void lwIPServiceTimers();
+
+extern "C" void InputEvent() {
+    TOGGLE_LED(3);
+}
+
+__used err_t g_SendError = 0;
 int main() {
     ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);
     ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
@@ -42,21 +49,24 @@ int main() {
     SysTickPeriodSet(120000);
     SysTickIntRegister([]() __interrupt {
         CFXS::Time::ms++;
+        if ((CFXS::Time::ms % 100) == 0) {
+            lwIPServiceTimers();
+        }
     });
     SysTickEnable();
     SysTickIntEnable();
 
-    raw_pcb *socket = raw_new(0xFF);
-
+    raw_pcb *rawpcb = raw_new(0xFF);
+    raw_bind(rawpcb, IP_ADDR_ANY);
     raw_recv(
-        socket,
+        rawpcb,
         [](void *arg, struct raw_pcb *pcb, struct pbuf *p, const ip_addr_t *addr) -> uint8_t {
-            TOGGLE_LED(3);
-            return 0;
+            TOGGLE_LED(2);
+            return 1;
         },
         nullptr);
-    raw_bind(socket, &ip_addr_any);
-    ip_set_option(socket, SOF_BROADCAST);
+
+    CFXS::CPU::EnableInterrupts();
 
     while (1 < 2) {
         LED(0, (CFXS::Time::ms / 250) & 1);

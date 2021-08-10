@@ -468,7 +468,7 @@ static void lwIPLinkDetect(void) {
 //
 //*****************************************************************************
 #if NO_SYS
-static void lwIPServiceTimers(void) {
+void lwIPServiceTimers(void) {
     //
     // Service the host timer.
     //

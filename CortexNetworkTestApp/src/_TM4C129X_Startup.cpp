@@ -1,7 +1,7 @@
 #include <driverlib_includes.hpp>
 
 namespace CFXS::CPU {
-    extern uint32_t CLOCK_FREQUENCY;
+    extern const uint32_t CLOCK_FREQUENCY;
 } // namespace CFXS::CPU
 
 // Empty handler for Tiva lib ASSERT
@@ -47,6 +47,8 @@ static __interrupt void __interrupt_DefaultHandler(void) {
 }
 
 static __interrupt void __interrupt_Reset() {
+    CFXS::CPU::DisableInterrupts();
+
     // Enable FPU
     HWREG(NVIC_CPAC) = ((HWREG(NVIC_CPAC) & ~(NVIC_CPAC_CP10_M | NVIC_CPAC_CP11_M)) | NVIC_CPAC_CP10_FULL | NVIC_CPAC_CP11_FULL);
 
