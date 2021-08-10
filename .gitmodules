@@ -10,3 +10,6 @@
 [submodule "CortexNetworkTestApp/vendor/CFXS-Base"]
 	path = CortexNetworkTestApp/vendor/CFXS-Base
 	url = https://github.com/CFXS/CFXS-Base.git
+[submodule "CortexNetworkTestApp/vendor/SeggerRTT"]
+	path = CortexNetworkTestApp/vendor/SeggerRTT
+	url = https://github.com/CFXS/SeggerRTT-printf.git
