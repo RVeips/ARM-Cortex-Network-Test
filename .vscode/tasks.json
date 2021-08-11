@@ -30,7 +30,8 @@
                 "${workspaceRoot}/CortexNetworkTestApp/_License.lhg"
             ],
             "dependsOn": [
-                "GLH_CFXS-Base"
+                "GLH_CFXS-Base",
+                "GLH_CFXS-IP"
             ],
             "group": "test"
         },
@@ -38,9 +39,6 @@
             "label": "GLH_CFXS-Base",
             "type": "shell",
             "command": "py",
-            "dependsOn": [
-                "GLH_CFXS-IP"
-            ],
             "args": [
                 "${workspaceRoot}/CortexNetworkTestApp/vendor/LicenseGen/UpdateHeaders_GPLv3.py",
                 "${workspaceRoot}/CortexNetworkTestApp/vendor/CFXS-Base",

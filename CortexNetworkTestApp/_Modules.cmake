@@ -13,3 +13,7 @@ target_link_libraries(${EXE_NAME} PRIVATE lwip)
 # CFXS Base
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/vendor/CFXS-Base")
 target_link_libraries(${EXE_NAME} PRIVATE CFXS_Base)
+
+# CFXS IP
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/vendor/CFXS-IP")
+target_link_libraries(${EXE_NAME} PRIVATE CFXS_IP)
