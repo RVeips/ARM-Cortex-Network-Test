@@ -19,6 +19,19 @@
                     "${workspaceRoot}/build"
                 ]
             }
+        },
+        {
+            "label": "Generate License Headers",
+            "type": "shell",
+            "command": "py",
+            "args": [
+                "${workspaceRoot}/CortexNetworkTestApp/vendor/LicenseGen/UpdateHeaders_GPLv3.py",
+                "${workspaceRoot}/CortexNetworkTestApp/src",
+                "// [CFXS] //",
+                "CFXS ARM Network Test App <https://github.com/RVeips/ARM-Cortex-Network-Test>",
+                "2021 - CFXS / Rihards Veips"
+            ],
+            "group": "test"
         }
     ]
 }
