@@ -1,3 +1,4 @@
+// [CFXS] //
 #pragma once
 
 #define CFXS_println(...)    \

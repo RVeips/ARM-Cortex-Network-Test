@@ -1,3 +1,4 @@
+// [CFXS] //
 #include "lwiplib.h"
 #include <CFXS/Base/Network/IPv4.hpp>
 #include <CFXS/Base/Network/MAC_Address.hpp>
@@ -101,18 +102,6 @@ int main() {
     });
     SysTickEnable();
     SysTickIntEnable();
-
-    raw_pcb *rawpcb = raw_new(0xFF);
-    raw_bind(rawpcb, IP_ADDR_ANY);
-    raw_recv(
-        rawpcb,
-        [](void *arg, struct raw_pcb *pcb, struct pbuf *p, const ip_addr_t *addr) -> uint8_t {
-            TOGGLE_LED(3);
-            s_BPS += p->tot_len;
-            pbuf_free(p);
-            return 1;
-        },
-        nullptr);
 
     CFXS::CPU::EnableInterrupts();
 
