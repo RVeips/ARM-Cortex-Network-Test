@@ -27,9 +27,35 @@
             "args": [
                 "${workspaceRoot}/CortexNetworkTestApp/vendor/LicenseGen/UpdateHeaders_GPLv3.py",
                 "${workspaceRoot}/CortexNetworkTestApp/src",
-                "// [CFXS] //",
-                "CFXS ARM Network Test App <https://github.com/RVeips/ARM-Cortex-Network-Test>",
-                "2021 - CFXS / Rihards Veips"
+                "${workspaceRoot}/CortexNetworkTestApp/_License.lhg"
+            ],
+            "dependsOn": [
+                "GLH_CFXS-Base"
+            ],
+            "group": "test"
+        },
+        {
+            "label": "GLH_CFXS-Base",
+            "type": "shell",
+            "command": "py",
+            "dependsOn": [
+                "GLH_CFXS-IP"
+            ],
+            "args": [
+                "${workspaceRoot}/CortexNetworkTestApp/vendor/LicenseGen/UpdateHeaders_GPLv3.py",
+                "${workspaceRoot}/CortexNetworkTestApp/vendor/CFXS-Base",
+                "${workspaceRoot}/CortexNetworkTestApp/vendor/CFXS-Base/_License.lhg"
+            ],
+            "group": "test"
+        },
+        {
+            "label": "GLH_CFXS-IP",
+            "type": "shell",
+            "command": "py",
+            "args": [
+                "${workspaceRoot}/CortexNetworkTestApp/vendor/LicenseGen/UpdateHeaders_GPLv3.py",
+                "${workspaceRoot}/CortexNetworkTestApp/vendor/CFXS-IP",
+                "${workspaceRoot}/CortexNetworkTestApp/vendor/CFXS-IP/_License.lhg"
             ],
             "group": "test"
         }
