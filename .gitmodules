@@ -19,3 +19,6 @@
 [submodule ".\\CortexNetworkTestApp\\vendor\\LicenseGen"]
 	path = .\\CortexNetworkTestApp\\vendor\\LicenseGen
 	url = https://github.com/CFXS/CFXS-License-Header-Generator.git
+[submodule "CortexNetworkTestApp/vendor/LicenseGen"]
+	path = CortexNetworkTestApp/vendor/LicenseGen
+	url = https://github.com/CFXS/CFXS-License-Header-Generator.git
