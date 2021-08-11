@@ -8,6 +8,7 @@
 #include "lwiplib.h"
 #include "netif/etharp.h"
 #include "netif/tivaif.h"
+#include "driverlib/debug.h"
 
 #ifdef PART_TM4C1292NCPDT
 #include "driverlib/gpio.h"
@@ -24,98 +25,6 @@
 #endif
 
 struct netif g_sNetIF;
-//*****************************************************************************
-//
-// Include lwIP high-level API code.
-//
-//*****************************************************************************
-//#include "lwip/src/api/api_lib.c"
-//#include "lwip/src/api/api_msg.c"
-//#include "lwip/src/api/err.c"
-//#include "lwip/src/api/netbuf.c"
-//#include "lwip/src/api/netdb.c"
-//#include "lwip/src/api/netifapi.c"
-//#include "lwip/src/api/sockets.c"
-//#include "lwip/src/api/tcpip.c"
-
-//*****************************************************************************
-//
-// Include the core lwIP TCP/IP stack code.
-//
-//*****************************************************************************
-//#include "lwip/src/core/def.c"
-//#include "lwip/src/core/dhcp.c"
-//#include "lwip/src/core/dns.c"
-//#include "lwip/src/core/init.c"
-//#include "lwip/src/core/mem.c"
-//#include "lwip/src/core/memp.c"
-//#include "lwip/src/core/netif.c"
-//#include "lwip/src/core/pbuf.c"
-//#include "lwip/src/core/raw.c"
-//#include "lwip/src/core/stats.c"
-//#include "lwip/src/core/sys.c"
-//#include "lwip/src/core/tcp.c"
-//#include "lwip/src/core/tcp_in.c"
-//#include "lwip/src/core/tcp_out.c"
-//#include "lwip/src/core/timers.c"
-//#include "lwip/src/core/udp.c"
-
-//*****************************************************************************
-//
-// Include the IPV4 code.
-//
-//*****************************************************************************
-//#include "lwip/src/core/ipv4/autoip.c"
-//#include "lwip/src/core/ipv4/icmp.c"
-//#include "lwip/src/core/ipv4/igmp.c"
-//#include "lwip/src/core/ipv4/inet.c"
-//#include "lwip/src/core/ipv4/inet_chksum.c"
-//#include "lwip/src/core/ipv4/ip.c"
-//#include "lwip/src/core/ipv4/ip_addr.c"
-//#include "lwip/src/core/ipv4/ip_frag.c"
-
-//*****************************************************************************
-//
-// Include the network interface code.
-//
-//*****************************************************************************
-//#include "lwip/src/netif/etharp.c"
-
-//*****************************************************************************
-//
-// Include the network interface PPP code.
-//
-//*****************************************************************************
-//#include "lwip/src/netif/ppp/auth.c"
-//#include "lwip/src/netif/ppp/chap.c"
-//#include "lwip/src/netif/ppp/chpms.c"
-//#include "lwip/src/netif/ppp/fsm.c"
-//#include "lwip/src/netif/ppp/ipcp.c"
-//#include "lwip/src/netif/ppp/lcp.c"
-//#include "lwip/src/netif/ppp/magic.c"
-//#include "lwip/src/netif/ppp/md5.c"
-//#include "lwip/src/netif/ppp/pap.c"
-//#include "lwip/src/netif/ppp/ppp.c"
-//#include "lwip/src/netif/ppp/ppp_oe.c"
-//#include "lwip/src/netif/ppp/randm.c"
-//#include "lwip/src/netif/ppp/vj.c"
-
-//*****************************************************************************
-//
-// Include Tiva-specific lwIP interface/porting layer code.
-//
-//*****************************************************************************
-//#include "lwip/ports/tiva-tm4c129/perf.c"
-//#include "lwip/ports/tiva-tm4c129/sys_arch.c"
-//#include "lwip/ports/tiva-tm4c129/netif/tiva-tm4c129.c"
-
-//*****************************************************************************
-//
-//! \addtogroup lwiplib_api
-//! @{
-//
-//*****************************************************************************
-
 //*****************************************************************************
 //
 // The lwIP Library abstration layer provides for a host callback function to
