@@ -16,3 +16,6 @@
 [submodule "CortexNetworkTestApp/vendor/CFXS-IP"]
 	path = CortexNetworkTestApp/vendor/CFXS-IP
 	url = https://github.com/CFXS/CFXS-IP.git
+[submodule ".\\CortexNetworkTestApp\\vendor\\LicenseHeaderGenerator"]
+	path = .\\CortexNetworkTestApp\\vendor\\LicenseHeaderGenerator
+	url = https://github.com/RVeips/CFXS-License-Header-Generator.git
