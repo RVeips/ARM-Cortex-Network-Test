@@ -1,4 +1,6 @@
 {
+    "C_Cpp.intelliSenseMemoryLimit": 16384,
+    "C_Cpp.intelliSenseCacheSize": 0,
     "files.associations": {
         "cstdint": "cpp",
         "cstdbool": "cpp",
