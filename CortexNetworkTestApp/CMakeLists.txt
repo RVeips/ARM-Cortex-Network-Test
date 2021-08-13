@@ -55,8 +55,8 @@ add_executable(${EXE_NAME} ${sources} ${headers})
 target_include_directories(${EXE_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 include_directories(${EXE_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/_config/lwip)
 include_directories(${EXE_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/_config/lwip/include)
-include("_Modules.cmake")
 include("_Defines.cmake")
+include("_Modules.cmake")
 
 target_precompile_headers(
     ${EXE_NAME}

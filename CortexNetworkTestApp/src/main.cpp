@@ -19,11 +19,10 @@
 
 #include <driverlib/systick.h>
 
-#include <CFXS/Base/Network/IPv4.hpp>
-#include <CFXS/Base/Network/MAC_Address.hpp>
+#include <CFXS/Base/IPv4.hpp>
+#include <CFXS/Base/MAC_Address.hpp>
+#include <CFXS/IP/NetworkInterface.hpp>
 #include <driverlib_includes.hpp>
-
-#include "lwiplib.h"
 
 namespace CFXS::CPU {
     extern const uint32_t CLOCK_FREQUENCY;
@@ -57,7 +56,7 @@ uint8_t s_Heap[64][2048];
 bool s_HeapUsage[64] = {false};
 
 void *malloc(size_t size) {
-    if (size < 2048) {
+    if (size <= 2048) {
         for (int i = 0; i < 64; i++) {
             if (s_HeapUsage[i] == false) {
                 s_HeapUsage[i] = true;
@@ -98,23 +97,30 @@ int main() {
         LED(i, 0);
     }
 
+    CFXS::IP::NetworkInterface netif(mac, ip, mask, gateway);
+    netif.InitializeHardware();
+    netif.InitializeHardware();
+
     IntRegister(INT_EMAC0, []() __interrupt {
+        ROM_EMACIntClear(EMAC0_BASE, 0xFFFFFFFF);
         TOGGLE_LED(1);
-        lwIPEthernetIntHandler();
+        //lwIPEthernetIntHandler();
     });
+
+    /*
     lwIPInit(CFXS::CPU::CLOCK_FREQUENCY,
              mac.GetDataPointer(),
              ip.ToNetworkOrder(),
              mask.ToNetworkOrder(),
              gateway.ToNetworkOrder(),
-             IPADDR_USE_STATIC);
+             IPADDR_USE_STATIC);*/
 
     SysTickPeriodSet(120000);
     SysTickIntRegister([]() __interrupt {
         CFXS::Time::ms++;
-        if ((CFXS::Time::ms % 100) == 0) {
-            lwIPServiceTimers();
-        }
+        //if ((CFXS::Time::ms % 100) == 0) {
+        //lwIPServiceTimers();
+        //}
         if ((CFXS::Time::ms % 1000) == 0) {
             s_Rate = s_BPS;
             s_BPS  = 0;
