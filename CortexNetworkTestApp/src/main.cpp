@@ -19,14 +19,22 @@
 
 #include <driverlib/systick.h>
 
+/*
+/###########    /###########    \##\   /##/    /###########
+############    ###########/     \##\ /##/     ###########/
+###             ###               \##/##/      ###
+###             ### #######        \/##/       ############
+###             ### ######/        /##/#\      \###########
+###             ###               /##/\##\              ###
+############    ###              /##/  \##\    /###########
+###########/    ###             /##/    \##\   ###########/
+*/
+
 #include <CFXS/Base/IPv4.hpp>
 #include <CFXS/Base/MAC_Address.hpp>
 #include <CFXS/IP/NetworkInterface.hpp>
+#include <CFXS/IP/TransferBuffer.hpp>
 #include <driverlib_includes.hpp>
-
-namespace CFXS::CPU {
-    extern const uint32_t CLOCK_FREQUENCY;
-}
 
 namespace CFXS::Time {
     uint64_t ms;
