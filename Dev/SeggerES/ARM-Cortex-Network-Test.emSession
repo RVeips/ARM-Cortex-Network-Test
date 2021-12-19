@@ -59,7 +59,7 @@
  <Files>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="96" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../CortexNetworkTestApp/src/main.cpp" selected="0" top="96" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="47" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../CortexNetworkTestApp/src/_TM4C129X_Startup.cpp" selected="0" top="32" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="17" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../CortexNetworkTestApp/vendor/CFXS-Base/include/CFXS/Base/RefCounter.hpp" selected="0" top="0" codecName=""/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="17" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../CortexNetworkTestApp/vendor/CFXS-Base/include/CFXS/Base/RefCounter.hpp" selected="0" top="0" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="ARM-Cortex-Network-Test" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <ARMCrossStudioWindow activeProject="ARM-Cortex-Network-Test" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>
